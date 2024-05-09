@@ -149,7 +149,9 @@ bool RPLidar::getScanData(ScanData *scanDataList, uint32_t timeoutMs) {
     for (size_t i = 0; i < scanNodesCount; i++) {
         const auto scanNode = scanNodes[i];
 
-        auto angle = (int) ((scanNode.angle_z_q14 * 90.f) / (1 << 14)); // NOLINT(*-narrowing-conversions)
+        const auto rawAngle = ((scanNode.angle_z_q14 * 90.f) / (1 << 14)); // NOLINT(*-narrowing-conversions)
+        auto angle = (int) rawAngle;
+
         if (angle < MIN_ANGLE) {
             std::cout << "Got angle < " << MIN_ANGLE << " = " << angle << std::endl;
             angle = MIN_ANGLE;
@@ -163,7 +165,7 @@ bool RPLidar::getScanData(ScanData *scanDataList, uint32_t timeoutMs) {
         const auto quality =
                 scanNode.quality >> SL_LIDAR_RESP_MEASUREMENT_QUALITY_SHIFT; // NOLINT(*-narrowing-conversions)
 
-        scanDataList[angle].distance = distance;
+        scanDataList[angle].distance = distance; // NOLINT(*-narrowing-conversions)
         scanDataList[angle].quality = quality;
     }
 

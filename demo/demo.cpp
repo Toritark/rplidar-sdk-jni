@@ -44,7 +44,7 @@ int main() {
 
     const auto scanDataList = new ScanData[ANGLE_RANGE];
 
-    for (size_t i = 0; i < 1024; i++) {
+    for (size_t i = 0; i < 128; i++) {
         std::cout << std::endl << "Iteration: " << i << std::endl << std::endl;
 
         if (!lidar->getScanData(scanDataList)) {
