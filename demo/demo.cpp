@@ -1,6 +1,5 @@
 #include <iostream>
 #include <unistd.h>
-#include <format>
 
 #include "RPLidar.h"
 
@@ -56,8 +55,7 @@ int main() {
 
         for (size_t angle = 0; angle < ANGLE_RANGE; angle++) {
             const auto scanData = scanDataList[angle];
-            std::cout << angle << ": distance=" << scanData.distance << ", quality="
-                      << std::format("{:d}", scanData.quality) << std::endl;
+            printf("%zu: %f, quality=%d", angle, scanData.distance, scanData.quality);
         }
 
         usleep(100 * 1000);
