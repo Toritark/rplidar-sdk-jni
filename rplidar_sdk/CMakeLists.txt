@@ -2,7 +2,10 @@ file(GLOB_RECURSE SOURCES
         "src/*.cpp"
 )
 
-add_library(rplidar_sdk SHARED ${SOURCES})
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+add_library(rplidar_sdk STATIC ${SOURCES})
 
 target_include_directories(rplidar_sdk
         PUBLIC
